@@ -7,7 +7,7 @@ green='\e[0;32m'
 NC='\e[0m'
 
 if [ ! -f /usr/local/bin/deleteduser ]; then
-    echo "echo "Script Created By VPS-Murah.net"" > /usr/local/bin/deleteduser
+    echo "echo "Script Created By Rocknet VPN"" > /usr/local/bin/deleteduser
 	chmod +x /usr/local/bin/deleteduser
 fi
 hariini=`date +%d-%m-%Y`
