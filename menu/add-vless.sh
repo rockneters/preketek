@@ -26,6 +26,7 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 uuid=$(cat /proc/sys/kernel/random/uuid)
 read -p "Expired (days): " masaaktif
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+exp1=`date -d "$masaaktif days" +"%d-%m-%Y"`
 sed -i '/#tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/v2ray/vless.json
 sed -i '/#none$/a\### '"$user $exp"'\
@@ -34,20 +35,28 @@ vlesslink1="vless://${uuid}@${domain}:$tls?path=/v2ray&security=tls&encryption=n
 vlesslink2="vless://${uuid}@${domain}:$none?path=/v2ray&encryption=none&type=ws#${user}"
 systemctl restart v2ray@vless
 systemctl restart v2ray@vnone
+echo -e "#VLESS $user $exp1 ${vlesslink1} ${vlesslink2}" >> /etc/list-akun
 clear
 echo -e ""
-echo -e "==========-V2RAY/VLESS-=========="
-echo -e "Remarks        : ${user}"
-echo -e "Domain         : ${domain}"
-echo -e "port TLS       : $tls"
-echo -e "port none TLS  : $none"
-echo -e "id             : ${uuid}"
-echo -e "Encryption     : none"
-echo -e "network        : ws"
-echo -e "path           : /v2ray"
-echo -e "================================="
-echo -e "link TLS       : ${vlesslink1}"
-echo -e "================================="
-echo -e "link none TLS  : ${vlesslink2}"
-echo -e "================================="
-echo -e "Expired On     : $exp"
+echo -e "Sukses !"
+echo -e "==============================" | lolcat
+echo -e "    • ROCKNET STORE | VPN • "
+echo -e "==============================" | lolcat
+echo -e "Vless Account Configuration"
+echo -e "Remarks       : ${user}"
+echo -e "Domain        : ${domain}"
+echo -e "port TLS      : $tls"
+echo -e "port none-TLS : $none"
+echo -e "id            : ${uuid}"
+echo -e "Encryption    : none"
+echo -e "network       : ws"
+echo -e "path          : /v2ray"
+echo -e "==============================" | lolcat
+echo -e "link TLS      : ${vlesslink1}"
+echo -e "==============================" | lolcat
+echo -e "link none-TLS : ${vlesslink2}"
+echo -e "==============================" | lolcat
+echo -e "Expired On    : $exp1"
+echo -e "==============================" | lolcat
+echo -e "Terimakasih"
+echo -e ""
