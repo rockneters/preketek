@@ -39,6 +39,10 @@ cd
 rm -f ssh-vpn.sh
 rm -f install-ws.sh
 rm -f ins-vt.sh
+
+touch /etc/listakun
+chmod +x /etc/listakun
+
 history -c
 echo "1.1" > /home/ver
 clear
