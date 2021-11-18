@@ -29,6 +29,21 @@ read -p "Hostname / Domain: " host
 echo "IP=$host" >> /var/lib/premium-script/ipvps.conf
 echo "$host" >> /etc/v2ray/domain
 
+cd
+timedatectl set-timezone Asia/Jakarta
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+apt update
+apt install -y bzip2 gzip coreutils screen curl
+apt install figlet -y
+apt install lolcat -y
+gem install lolcat
+
+#install speedtesst
+curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash
+apt-get install speedtest -y
+clear
+cd
 #install ssh ovpn
 wget https://raw.githubusercontent.com/rockneters/preketek/master/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn.sh ./ssh-vpn.sh
 #install ssh ws
@@ -41,7 +56,7 @@ rm -f install-ws.sh
 rm -f ins-vt.sh
 
 touch /etc/listakun
-chmod +x /etc/listakun
+chmod +x /etc/list-akun
 
 history -c
 echo "1.1" > /home/ver
