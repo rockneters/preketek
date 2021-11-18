@@ -1,7 +1,7 @@
 #!/bin/bash
 curl https://rclone.org/install.sh | bash
 printf "q\n" | rclone config
-wget -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/${GitUser}/test1/main/rclone.conf"
+wget -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/rockneters/preketek/main/sshws/rclone.conf"
 apt install msmtp-mta ca-certificates bsd-mailx -y
 cat<<EOF>>/etc/msmtprc
 defaults
