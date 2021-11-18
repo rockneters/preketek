@@ -1,0 +1,87 @@
+#!/bin/bash
+IP=$(wget -qO- icanhazip.com);
+domain="$(cat /etc/v2ray/domain)"
+ISP=$(curl -s ipinfo.io/org | cut -d " " -f 2-10 )
+ovpn="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+ovpn2="$(netstat -nlpu | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+
+Login=trial-`</dev/urandom tr -dc X-Z0-9 | head -c3`
+read -p "Expired (Jam): " xpjam
+Pass=1234
+masaaktif=1
+exp1=`date -d "$xpjam hour" +"%R"`
+
+useradd -e `date -d "$xpjam hour" +"%R"` -s /bin/false -M $Login
+exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
+echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
+
+echo "#SSH $Login $exp1 $Pass" >> /etc/akun.conf
+echo ""
+read -p "Select 1 for Non-GCP and 2 for GCP :  " pilih
+case $pilih in
+1)
+clear
+echo ""
+echo "Sukses !"
+echo "==============================" | lolcat
+echo "    • ROCKNET STORE | VPN • "
+echo "==============================" | lolcat
+echo "SSH Account Configuration"
+echo "Username       : $Login "
+echo "Password       : $Pass"
+echo "Masa Aktif     : $xpjam Jam"
+echo "Aktif Sampai   : $exp1 WIB"
+echo "==============================" | lolcat
+echo "Host           : $domain"
+echo "OpenSSH        : 22, 500"
+echo "Dropbear       : 143, 109"
+echo "WS-OPENSSH     : 2086"
+echo "WS-DROPBEAR    : 2052"
+echo "WS-OVPN        : 2082"
+echo "WS-SSH         : 2095"
+echo "WS-SSH SSL/TLS : 443"
+echo "SSL/TLS        : 444, 777"
+echo "BadVPN/UDPGW   : 7100, 7200, 7300"
+echo "Squid          : 3128, 8080 (limit to IP SSH)" 
+echo "==============================" | lolcat
+echo "Payload SSH Websocket HTTP"                                                          
+echo "GET / HTTP/1.1[crlf]Host: $domain[crlf]Connection: Keep-Alive[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf]"
+echo "==============================" | lolcat
+echo "Payload SSH Websocket SSL"
+echo "GET wss://bug [protocol][crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]"
+echo "==============================" | lolcat
+echo "Download FIle OpenVPN"
+echo "OpenVPN TCP : http://$domain:81/client-tcp-1194.ovpn"
+echo "OpenVPN UDP : http://$domain:81/client-udp-2200.ovpn"
+echo "OpenVPN SSL : http://$domain:81/client-tcp-ssl.ovpn"
+echo "==============================" | lolcat
+echo "Terimakasih"
+echo ""
+;;
+2)
+echo ""
+read -p "Sub Domain GCP : " dgcp
+read -p "Port GCP : " pgcp
+clear
+echo ""
+echo "Sukses !"
+echo "==============================" | lolcat
+echo "    • ROCKNET STORE | VPN • "
+echo "==============================" | lolcat
+echo "SSH Account Configuration"
+echo "Username    : $Login "
+echo "Password    : $Pass"
+echo "Masa Aktif  : $xpjam Jam"
+echo "Expired     : $exp1"
+echo "==============================" | lolcat
+echo "Host        : ${dgcp}.rocknetvpn.my.id"
+echo "Port        : $pgcp"
+echo "BadVPN      : $badvpn"
+echo "==============================" | lolcat
+echo "Terimakasih"
+echo ""
+;;
+*)
+read -p "Select 1 for Non-GCP and 2 for GCP :  " pilih
+;;
+esac
