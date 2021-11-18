@@ -6,11 +6,11 @@ MYIP=$(wget -qO- icanhazip.com);
 echo "Checking VPS"
 clear
 source /var/lib/premium-script/ipvps.conf
-if [[ "$IP" = "" ]]; then
+#if [[ "$IP" = "" ]]; then
 domain=$(cat /etc/v2ray/domain)
-else
-domain=$IP
-fi
+#else
+#domain=$IP
+#fi
 tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
 none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
@@ -26,6 +26,7 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 uuid=$(cat /proc/sys/kernel/random/uuid)
 read -p "Expired (days): " masaaktif
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+exp1=`date -d "$masaaktif days" +"%d-%m-%Y"`
 sed -i '/#tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"2"',"email": "'""$user""'"' /etc/v2ray/config.json
 sed -i '/#none$/a\### '"$user $exp"'\
@@ -67,21 +68,29 @@ vmesslink2="vmess://$(base64 -w 0 /etc/v2ray/$user-none.json)"
 systemctl restart v2ray
 systemctl restart v2ray@none
 service cron restart
+echo -e "#VMESS $user $exp1 ${vmesslink1} ${vmesslink2}" >> /etc/list-akun
 clear
 echo -e ""
-echo -e "==========-V2RAY/VMESS-=========="
+echo -e "Sukses !"
+echo -e "==============================" | lolcat
+echo -e "    • ROCKNET STORE | VPN • "
+echo -e "==============================" | lolcat
+echo -e "Vmess Account Configuration"
 echo -e "Remarks        : ${user}"
 echo -e "Domain         : ${domain}"
 echo -e "port TLS       : ${tls}"
-echo -e "port none TLS  : ${none}"
+echo -e "port none-TLS  : ${none}"
 echo -e "id             : ${uuid}"
 echo -e "alterId        : 2"
 echo -e "Security       : auto"
 echo -e "network        : ws"
 echo -e "path           : /v2ray"
-echo -e "================================="
+echo -e "==============================" | lolcat
 echo -e "link TLS       : ${vmesslink1}"
-echo -e "================================="
+echo -e "==============================" | lolcat
 echo -e "link none TLS  : ${vmesslink2}"
-echo -e "================================="
-echo -e "Expired On     : $exp"
+echo -e "==============================" | lolcat
+echo -e "Expired On     : $exp1"
+echo -e "==============================" | lolcat
+echo -e "Terimakasih"
+echo -e ""
