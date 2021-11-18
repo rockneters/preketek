@@ -1,0 +1,58 @@
+#!/bin/bash
+
+#SSH USER
+now=`date +"%R"`
+bulan=`date +"%d-%m-%Y"`
+
+data1=( `cat /etc/list-akun | grep '^#SSH' | cut -d ' ' -f 2`);
+for user in "${data1[@]}"
+do
+exp=$(grep -w "^#SSH $user" "/etc/list-akun" | cut -d ' ' -f 3)
+pass=$(grep -w "^#SSH $user" "/etc/list-akun" | cut -d ' ' -f 4)
+echo "User : $user Expaired : $exp"
+if [[ "$exp" == "$now" ]] || [[ "$exp" == "$bulan" ]]; then
+sed -i "/^#SSH $user $exp $pass/d" "/etc/list-akun"
+userdel $user
+echo "User : $user berhasil dihapus !"
+else
+echo "User SSH idak ada yg dihapus!"
+fi
+done
+
+data2=( `cat /etc/akun.conf | grep '^#VMESS' | cut -d ' ' -f 2`);
+for user in "${data2[@]}"
+do
+exp=$(grep -w "^#VMESS $user" "/etc/list-akun" | cut -d ' ' -f 3)
+echo "User : $user Expaired : $exp"
+if [[ "$exp" == "$now" ]] || [[ "$exp" == "$bulan" ]]; then
+sed -i "/^#VMESS $user $exp/d" "/etc/list-akun"
+sleep 1
+sed -i -e "/### ${user}.*/,/${user}.*$/d" /etc/v2ray/config.json
+sed -i -e "/### ${user}.*/,/${user}.*$/d" /etc/v2ray/none.json
+#sed -i "/^### $user $exp/,/^},{/d" /etc/v2ray/config.json
+#sed -i "/^### $user $exp/,/^},{/d" /etc/v2ray/none.json
+rm -f /etc/v2ray/$user-tls.json /etc/v2ray/$user-none.json
+systemctl restart v2ray
+systemctl restart v2ray@none
+echo "Vmess User : $user berhasil dihapus !"
+else
+echo "Vmess Account not erased!"
+fi
+done
+
+#TROJAN USER
+data3=( `cat /etc/list-akun | grep '^#TROJAN' | cut -d ' ' -f 2`);
+for user in "${data3[@]}"
+do
+exp=$(grep -w "^#TROJAN $user" "/etc/list-akun" | cut -d ' ' -f 3)
+echo "User : $user Expaired : $exp"
+if [[ "$exp" == "$now" ]] || [[ "$exp" == "$bulan" ]]; then
+sed -i "/^#TROJAN $user $exp/d" "/etc/list-akun"
+sleep 1
+sed -i '/^,"'"$user"'"$/d' /etc/trojan/config.json
+systemctl restart trojan
+echo "Trojan User : $user berhasil dihapus !"
+else
+echo "Trojan user tidak ada yg dihapus!"
+fi
+done
