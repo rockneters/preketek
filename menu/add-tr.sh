@@ -34,17 +34,17 @@ echo -e "#TROJAN $user $exp1 ${trojanlink}" >> /etc/list-akun
 clear
 echo -e ""
 echo -e "Sukses !"
-echo -e "=================================" | lolcat
-echo -e "     • ROCKNET STORE | VPN • "
-echo -e "=================================" | lolcat
+echo -e "==============================" | lolcat
+echo -e "    • ROCKNET STORE | VPN • "
+echo -e "==============================" | lolcat
 echo -e "Trojan Account Configuration"
-echo -e "Remarks        : ${user}"
-echo -e "Host/IP        : ${domain}"
-echo -e "port           : ${tr}"
-echo -e "Key            : ${user}"
-echo -e "link           : ${trojanlink}"
-echo -e "=================================" | lolcat
-echo -e "Expired On     : $exp1"
-echo -e "=================================" | lolcat
+echo -e "Remarks      : ${user}"
+echo -e "Host/IP      : ${domain}"
+echo -e "port         : ${tr}"
+echo -e "Key          : ${user}"
+echo -e "link         : ${trojanlink}"
+echo -e "==============================" | lolcat
+echo -e "Expired On   : $exp1"
+echo -e "==============================" | lolcat
 echo -e "Terimakasih"
 echo -e ""
