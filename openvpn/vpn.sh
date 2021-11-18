@@ -19,7 +19,7 @@ cp /etc/openvpn/easy-rsa/vars.example /etc/openvpn/easy-rsa/vars
 
 # Kemudian edit file variabel easy-rsa
 # nano /etc/openvpn/easy-rsa/vars
-wget -O /etc/openvpn/easy-rsa/vars "https://raw.githubusercontent.com/fisabiliyusri/test1/main/vars.conf"
+wget -O /etc/openvpn/easy-rsa/vars "https://raw.githubusercontent.com/rockneters/preketek/main/sshws/vars.conf"
 # edit projek export KEY_NAME="vpn"
 # Save dan keluar dari editor
 
@@ -163,7 +163,7 @@ cd clientconfig
 cd /etc/openvpn
 cat > /etc/openvpn/client-tcp-1197.ovpn <<-END
 ############## WELCOME TO ###############
-########## SLNET ###########
+########## ROCKNET VPN ###########
 ####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
@@ -185,7 +185,7 @@ sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
 cd /etc/openvpn
 cat > /etc/openvpn/client-udp-1194.ovpn <<-END
 ############## WELCOME TO ###############
-########## SLNET ###########
+########## ROCKNET VPN ###########
 ####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
@@ -206,7 +206,7 @@ sed -i $MYIP2 /etc/openvpn/client-udp-1194.ovpn;
 # Buat config client TCP 1194
 cat > /etc/openvpn/client-tcp-1194.ovpn <<-END
 ############## WELCOME TO ###############
-########## SLNET ###########
+########## ROCKNET VPN ###########
 ####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
@@ -227,7 +227,7 @@ sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
 # Buat config client UDP 2200
 cat > /etc/openvpn/client-udp-2200.ovpn <<-END
 ############## WELCOME TO ###############
-########## SLNET ###########
+########## ROCKNET VPN ###########
 ####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
@@ -248,7 +248,7 @@ sed -i $MYIP2 /etc/openvpn/client-udp-2200.ovpn;
 # Buat config client TCP 2200
 cat > /etc/openvpn/client-tcp-2200.ovpn <<-END
 ############## WELCOME TO ###############
-########## SLNET ###########
+########## ROCKNET VPN ###########
 ####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
@@ -269,7 +269,7 @@ sed -i $MYIP2 /etc/openvpn/client-tcp-2200.ovpn;
 # Buat config client SSL
 cat > /etc/openvpn/client-tcp-ssl.ovpn <<-END
 ############## WELCOME TO ###############
-########## SLNET ###########
+########## ROCKNET VPN ###########
 ####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
