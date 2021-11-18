@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=$(cat /root/domain)
+domain=$(cat /etc/v2ray/domain)
 apt install iptables iptables-persistent -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
 apt install socat cron bash-completion ntpdate -y
@@ -17,10 +17,12 @@ mkdir -p /etc/trojan/
 touch /etc/trojan/akun.conf
 # install v2ray
 wget https://raw.githubusercontent.com/rockneters/preketek/master/v2ray/go.sh && chmod +x go.sh && ./go.sh
-rm -f /root/go.sh
+cd
+rm -f go.sh
 bash -c "$(wget -O- https://raw.githubusercontent.com/rockneters/preketek/master/v2ray/trojan-quickstart.sh)"
 mkdir /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+wget -O /root/.acme.sh/acme.sh "https://raw.githubusercontent.com/rockneters/preketek/main/v2ray/acme.sh"
+#curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
@@ -503,7 +505,7 @@ wget -O cek-tr "https://raw.githubusercontent.com/rockneters/preketek/master/men
 wget -O renew-ws "https://raw.githubusercontent.com/rockneters/preketek/master/menu/renew-ws.sh"
 wget -O renew-vless "https://raw.githubusercontent.com/rockneters/preketek/master/menu/renew-vless.sh"
 wget -O renew-tr "https://raw.githubusercontent.com/rockneters/preketek/master/menu/renew-tr.sh"
-wget -O certv2ray "https://raw.githubusercontent.com/rockneters/preketek/master/menu/cert-sh"
+wget -O certv2ray "https://raw.githubusercontent.com/rockneters/preketek/master/menu/cert.sh"
 chmod +x add-ws
 chmod +x add-vless
 chmod +x add-tr
@@ -519,4 +521,4 @@ chmod +x renew-tr
 chmod +x certv2ray
 cd
 rm -f ins-vt.sh
-mv /root/domain /etc/v2ray
+#mv /root/domain /etc/v2ray
