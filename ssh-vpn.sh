@@ -1,5 +1,5 @@
 #!/bin/bash
-# Mod By Fauzanvpn
+# Mod By Rocknet VPN
 # 
 # ==================================================
 
@@ -15,10 +15,10 @@ ver=$VERSION_ID
 country=ID
 state=Indonesia
 locality=Indonesia
-organization=Fauzanvpn.com
-organizationalunit=Fauzanvpn.com
+organization=rocknetvpn.my.id
+organizationalunit=rocknetvpn.my.id
 commonname=0.0.0.0
-email=Fauzanvpn.com
+email=admin@rocknetvpn.my.id
 
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/rockneters/preketek/master/password"
@@ -86,7 +86,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git
 echo "clear" >> .profile
 echo "echo ================" >> .profile
-echo "echo Mod by Fauzanvpn" >> .profile
+echo "echo Mod by Rocknet VPN" >> .profile
 
 # install webserver
 apt -y install nginx
@@ -95,7 +95,7 @@ rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/rockneters/preketek/master/nginx/nginx.conf"
 mkdir -p /home/vps/public_html
-echo "<pre>Setup Mod By Fauzanvpn</pre>" > /home/vps/public_html/index.html
+echo "<pre>Setup Mod By Rocknet VPN</pre>" > /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/rockneters/preketek/master/nginx/vps.conf"
 /etc/init.d/nginx restart
 
@@ -176,8 +176,10 @@ accept = 992
 connect = 127.0.0.1:1194
 END
 
-echo "=================  membuat Sertifikat OpenSSL ======================"
+clear
+echo "=============  membuat Sertifikat OpenSSL ==============="
 echo "========================================================="
+sleep 2
 #membuat sertifikat
 cd /etc/stunnel/
 openssl genrsa -out key.pem 2048
@@ -212,13 +214,14 @@ fi
 clear
 echo; echo 'Installing DOS-Deflate 0.6'; echo
 echo; echo -n 'Downloading source files...'
-wget -q -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
+sleep 1
+wget -q -O /usr/local/ddos/ddos.conf https://raw.githubusercontent.com/rockneters/preketek/main/sshws/ddos.conf
 echo -n '.'
-wget -q -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
+wget -q -O /usr/local/ddos/LICENSE https://raw.githubusercontent.com/rockneters/preketek/main/sshws/LICENSE
 echo -n '.'
-wget -q -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
+wget -q -O /usr/local/ddos/ignore.ip.list https://raw.githubusercontent.com/rockneters/preketek/main/sshws/ignore.ip.list
 echo -n '.'
-wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
+wget -q -O /usr/local/ddos/ddos.sh https://raw.githubusercontent.com/rockneters/preketek/main/sshws/ddos.sh
 chmod 0755 /usr/local/ddos/ddos.sh
 cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 echo '...done'
@@ -302,7 +305,7 @@ chmod +x clear-log
 echo "================  Auto deleted Account Expired ======================"
 wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/rockneters/preketek/master/userdelexpired" && chmod +x /usr/local/bin/userdelexpired
 
-echo "0 0 * * * root /usr/local/bin/user-expire" > /etc/cron.d/user-expire
+echo "0 0 * * * root /usr/local/bin/userdelexpired" > /etc/cron.d/userdelexpired
 
 # remove unnecessary files
 apt -y autoclean
@@ -334,7 +337,7 @@ history -c
 echo "unset HISTFILE" >> /etc/profile
 
 cd
-rm -f /root/ssh-vpn.sh
+rm -f ssh-vpn.sh
 
 # finihsing
 clear
