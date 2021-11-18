@@ -282,7 +282,7 @@ wget -O autokick "https://raw.githubusercontent.com/rockneters/preketek/master/m
 wget -O ceklim "https://raw.githubusercontent.com/rockneters/preketek/master/menu/ceklim.sh"
 wget -O tendang "https://raw.githubusercontent.com/rockneters/preketek/master/menu/tendang.sh"
 wget -O clear-log "https://raw.githubusercontent.com/rockneters/preketek/master/menu/clear-log.sh"
-
+wget -O trial-ssh "https://raw.githubusercontent.com/rockneters/preketek/master/menu/trial-ssh" && chmod +x trial-ssh
 wget -O exp-jam "https://raw.githubusercontent.com/rockneters/preketek/master/menu/exp-jam" && chmod +x exp-jam
 
 chmod +x addhost
