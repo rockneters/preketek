@@ -12,6 +12,7 @@ green='\e[0;32m'
 NC='\e[0m'
 MYIP=$(wget -qO- icanhazip.com);
 echo "Authentikasi pada server"
+sleep 2
 IZIN=$( curl icanhazip.com | grep $MYIP )
 if [ $MYIP = $IZIN ]; then
 echo -e "${green}Permintaan Diterima...${NC}"
@@ -34,17 +35,17 @@ wget https://raw.githubusercontent.com/rockneters/preketek/master/ssh-vpn.sh && 
 wget https://raw.githubusercontent.com/rockneters/preketek/master/websket/install-ws.sh && chmod +x install-ws.sh && screen -S install-ws.sh ./install-ws.sh
 #install v2ray
 wget https://raw.githubusercontent.com/rockneters/preketek/master/ins-vt.sh && chmod +x ins-vt.sh && screen -S v2ray ./ins-vt.sh
-
-rm -f /root/ssh-vpn.sh
-rm -f /root/install-ws.sh
-rm -f /root/ins-vt.sh
+cd
+rm -f ssh-vpn.sh
+rm -f install-ws.sh
+rm -f ins-vt.sh
 history -c
 echo "1.1" > /home/ver
 clear
 echo " "
 echo "Installation has been completed!!"
 echo " "
-echo "=================================-Script Mod Fauzanvpn-===========================" | tee -a log-install.txt
+echo "================================-Script Mod rocknet VPN-==========================" | tee -a log-install.txt
 echo "" | tee -a log-install.txt
 echo "----------------------------------------------------------------------------------" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
@@ -77,7 +78,7 @@ echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
 echo "   - Autoreboot On 08.00 - 00.00 GMT +7" | tee -a log-install.txt
 echo "   - Installation Log --> /root/log-install.txt"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "------------------------------------------Mod by Fauzanvpn------------------------------------------" | tee -a log-install.txt
+echo "----------------------------------------------------------------------------------" | tee -a log-install.txt
 echo ""
 echo " Reboot 10 Sec"
 sleep 10
