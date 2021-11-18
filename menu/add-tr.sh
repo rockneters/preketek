@@ -26,16 +26,25 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
 read -p "Expired (days): " masaaktif
 sed -i '/"'""$uuid""'"$/a\,"'""$user""'"' /etc/trojan/config.json
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+exp1=`date -d "$masaaktif days" +"%d-%m-%Y"`
 echo -e "### $user $exp" >> /etc/trojan/akun.conf
 systemctl restart trojan
 trojanlink="trojan://${user}@${domain}:${tr}"
+echo -e "#TROJAN $user $exp1 ${trojanlink}" >> /etc/list-akun
 clear
 echo -e ""
-echo -e "=============-Trojan-============"
+echo -e "Sukses !"
+echo -e "=================================" | lolcat
+echo -e "     • ROCKNET STORE | VPN • "
+echo -e "=================================" | lolcat
+echo -e "Trojan Account Configuration"
 echo -e "Remarks        : ${user}"
 echo -e "Host/IP        : ${domain}"
 echo -e "port           : ${tr}"
 echo -e "Key            : ${user}"
 echo -e "link           : ${trojanlink}"
-echo -e "================================="
-echo -e "Expired On     : $exp"
+echo -e "=================================" | lolcat
+echo -e "Expired On     : $exp1"
+echo -e "=================================" | lolcat
+echo -e "Terimakasih"
+echo -e ""
